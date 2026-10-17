@@ -1,0 +1,87 @@
+# Job principal: landing -> bronze -> silver -> gold -> marts -> calidad.
+# Compute serverless (no se declaran clusters). Cada task es un notebook "delgado"
+# que llama al paquete `src/novamart`.
+resources:
+  jobs:
+    novamart_e2e:
+      name: novamart-e2e-pipeline
+      description: Pipeline medallion completo de NovaMart (Spark + SQL + Delta + UC)
+      max_concurrent_runs: 1
+      timeout_seconds: 14400
+      tags:
+        project: novamart
+        layer: all
+      # Alertas: agregar `email_notifications: {on_failure: [tu@email.com]}` o un webhook de Slack.
+
+      parameters:
+        - name: catalog
+          default: ${var.catalog}
+        - name: scale_factor
+          default: ${var.scale_factor}
+        - name: start_date
+          default: ${var.start_date}
+        - name: end_date
+          default: ${var.end_date}
+        - name: generate
+          default: "true"
+        - name: full_refresh
+          default: "false"
+
+      tasks:
+        - task_key: setup
+          notebook_task:
+            notebook_path: ../notebooks/00_setup.py
+
+        - task_key: should_generate
+          depends_on: [{ task_key: setup }]
+          condition_task:
+            op: EQUAL_TO
+            left: "{{job.parameters.generate}}"
+            right: "true"
+
+        - task_key: generate_data
+          depends_on: [{ task_key: should_generate, outcome: "true" }]
+          notebook_task:
+            notebook_path: ../notebooks/01_generate_data.py
+
+        - task_key: bronze_ingest
+          depends_on: [{ task_key: generate_data }, { task_key: should_generate }]
+          run_if: NONE_FAILED
+          # Auto Loader detiene el stream una vez cuando detecta columnas nuevas: el reintento lo retoma
+          max_retries: 2
+          min_retry_interval_millis: 10000
+          notebook_task:
+            notebook_path: ../notebooks/02_bronze_ingest.py
+
+        # for_each: una ejecución del mismo notebook por entidad, 4 en paralelo
+        - task_key: silver
+          depends_on: [{ task_key: bronze_ingest }]
+          for_each_task:
+            inputs: '["customers","products","stores","orders","order_status_events","returns","web_events","inventory_snapshots"]'
+            concurrency: 4
+            task:
+              task_key: silver_entity
+              notebook_task:
+                notebook_path: ../notebooks/03_silver_entity.py
+                base_parameters:
+                  entity: "{{input}}"
+
+        - task_key: gold_dimensions
+          depends_on: [{ task_key: silver }]
+          notebook_task:
+            notebook_path: ../notebooks/04_gold_dimensions.py
+
+        - task_key: gold_facts
+          depends_on: [{ task_key: gold_dimensions }]
+          notebook_task:
+            notebook_path: ../notebooks/05_gold_facts.py
+
+        - task_key: gold_marts
+          depends_on: [{ task_key: gold_facts }]
+          notebook_task:
+            notebook_path: ../notebooks/06_gold_marts.py
+
+        - task_key: data_quality_gate
+          depends_on: [{ task_key: gold_marts }]
+          notebook_task:
+            notebook_path: ../notebooks/07_data_quality_report.py

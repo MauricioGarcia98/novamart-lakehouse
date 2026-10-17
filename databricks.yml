@@ -1,0 +1,42 @@
+# =============================================================================
+# Databricks Asset Bundle (DAB) — infraestructura como código del proyecto.
+#
+#   databricks bundle validate            # valida la configuración
+#   databricks bundle deploy -t dev       # sube código + crea jobs/pipeline (prefijo [dev usuario])
+#   databricks bundle run novamart_e2e    # ejecuta el pipeline completo
+#   databricks bundle deploy -t prod      # despliegue productivo (lo hace CI/CD)
+#
+# El host del workspace se toma de DATABRICKS_HOST o de ~/.databrickscfg.
+# =============================================================================
+bundle:
+  name: novamart-lakehouse
+
+include:
+  - resources/*.yml
+
+variables:
+  catalog:
+    description: Catálogo de Unity Catalog donde vive el proyecto
+    default: novamart
+  scale_factor:
+    description: "Volumen de datos: 0.1 (~3 GB, Free Edition), 1 (~30 GB), 10 (~300 GB)"
+    default: "0.1"
+  start_date:
+    default: "2023-01-01"
+  end_date:
+    default: "2025-12-31"
+
+targets:
+  dev:
+    mode: development       # prefija recursos con [dev <usuario>] y pausa schedules
+    default: true
+    variables:
+      catalog: novamart_dev
+
+  prod:
+    mode: production
+    workspace:
+      root_path: /Workspace/Shared/.bundle/${bundle.name}/${bundle.target}
+    variables:
+      catalog: novamart
+      scale_factor: "1"

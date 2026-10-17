@@ -1,0 +1,20 @@
+# Mantenimiento semanal: diseño físico, OPTIMIZE, VACUUM y estadísticas.
+resources:
+  jobs:
+    novamart_maintenance:
+      name: novamart-weekly-maintenance
+      schedule:
+        quartz_cron_expression: "0 0 3 ? * SUN"
+        timezone_id: America/Argentina/Buenos_Aires
+        pause_status: PAUSED
+      parameters:
+        - name: catalog
+          default: ${var.catalog}
+      tasks:
+        - task_key: physical_design
+          notebook_task:
+            notebook_path: ../notebooks/08_physical_design.py
+        - task_key: optimize_vacuum_analyze
+          depends_on: [{ task_key: physical_design }]
+          notebook_task:
+            notebook_path: ../notebooks/09_maintenance.py

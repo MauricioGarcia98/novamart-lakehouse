@@ -1,0 +1,22 @@
+# Versión DECLARATIVA del mismo pipeline con Lakeflow Spark Declarative Pipelines
+# (ex Delta Live Tables), escrita 100% en SQL. Comparar con la versión imperativa
+# (notebooks + src/) es uno de los ejercicios de la ruta de aprendizaje (módulo 14).
+resources:
+  pipelines:
+    novamart_ldp:
+      name: novamart-declarative-pipeline
+      catalog: ${var.catalog}
+      schema: ldp
+      serverless: true
+      continuous: false
+      channel: CURRENT
+      photon: true
+      configuration:
+        landing_path: /Volumes/${var.catalog}/landing/raw/landing
+      libraries:
+        - file:
+            path: ../pipelines/01_bronze.sql
+        - file:
+            path: ../pipelines/02_silver.sql
+        - file:
+            path: ../pipelines/03_gold.sql

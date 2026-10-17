@@ -1,0 +1,35 @@
+# Simulación de operación diaria: "llega" un día nuevo de datos y se procesa
+# incrementalmente. Demuestra Auto Loader + checkpoints + MERGE + replaceWhere.
+resources:
+  jobs:
+    novamart_daily:
+      name: novamart-daily-increment
+      description: Genera el día siguiente de datos y dispara el pipeline incremental
+      schedule:
+        quartz_cron_expression: "0 30 5 * * ?"   # 05:30 todos los días
+        timezone_id: America/Argentina/Buenos_Aires
+        pause_status: PAUSED
+      parameters:
+        - name: catalog
+          default: ${var.catalog}
+        - name: scale_factor
+          default: ${var.scale_factor}
+        - name: start_date
+          default: ${var.start_date}
+        - name: end_date
+          default: ${var.end_date}
+        - name: run_date
+          default: ""     # vacío = día siguiente al último procesado
+      tasks:
+        - task_key: generate_next_day
+          notebook_task:
+            notebook_path: ../notebooks/10_generate_next_day.py
+
+        - task_key: run_pipeline
+          depends_on: [{ task_key: generate_next_day }]
+          run_job_task:
+            job_id: ${resources.jobs.novamart_e2e.id}
+            job_parameters:
+              catalog: "{{job.parameters.catalog}}"
+              scale_factor: "{{job.parameters.scale_factor}}"
+              generate: "false"
