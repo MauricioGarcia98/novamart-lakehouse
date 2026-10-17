@@ -13,6 +13,8 @@
 ```bash
 cd novamart-lakehouse
 databricks auth login --host https://<workspace>
+# una sola vez (Default Storage no permite crear catálogos por API):
+#   CREATE CATALOG IF NOT EXISTS novamart_dev   -- desde el SQL Editor
 databricks bundle validate
 databricks bundle deploy -t dev
 databricks bundle run novamart_e2e -t dev --params scale_factor=0.1
@@ -23,12 +25,14 @@ databricks bundle run novamart_e2e -t dev --params scale_factor=0.1
 | job | `novamart-e2e-pipeline` | landing → gold + quality gate |
 | job | `novamart-daily-increment` | genera el día siguiente y dispara el e2e (schedule pausado) |
 | job | `novamart-weekly-maintenance` | diseño físico + OPTIMIZE/VACUUM/ANALYZE |
-| pipeline | `novamart-declarative-pipeline` | versión Lakeflow Declarative (SQL) en el esquema `ldp` |
+| pipeline | `novamart-declarative-pipeline` | versión Lakeflow Declarative (SQL) en el esquema `ldp` (en `dev`: `dev_<usuario>_ldp`) |
 
 `-t dev` crea todo con prefijo `[dev <usuario>]` en el catálogo `novamart_dev`.
 `-t prod` usa `novamart` y `scale_factor=1`.
 
 ## Sin CLI (Git folder)
+
+> Guía detallada con sub-pasos: [06_guia_desde_la_web.md](06_guia_desde_la_web.md).
 
 1. *Workspace → Create → Git folder* con la URL del repositorio.
 2. Abrir `novamart-lakehouse/notebooks/00_setup` y ejecutar en orden hasta `07_data_quality_report`

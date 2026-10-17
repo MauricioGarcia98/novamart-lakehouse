@@ -5,8 +5,8 @@ resources:
   pipelines:
     novamart_ldp:
       name: novamart-declarative-pipeline
-      catalog: ${var.catalog}
-      schema: ldp
+      catalog: ${resources.schemas.ldp.catalog_name}
+      schema: ${resources.schemas.ldp.name}
       serverless: true
       continuous: false
       channel: CURRENT

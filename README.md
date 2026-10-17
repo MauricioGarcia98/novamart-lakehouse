@@ -156,6 +156,10 @@ El mismo pipeline está implementado **dos veces**: imperativo (`src/` + noteboo
 ```bash
 # Databricks CLI: brew install databricks  |  winget install Databricks.DatabricksCLI
 databricks auth login --host https://<tu-workspace>.cloud.databricks.com
+# Una sola vez: el pipeline declarativo necesita que el catálogo exista al desplegar.
+# (En Default Storage / Free Edition sólo se puede crear por SQL, no vía API.)
+databricks api post /api/2.0/sql/statements --json \
+  '{"warehouse_id":"<id>","statement":"CREATE CATALOG IF NOT EXISTS novamart_dev"}'
 databricks bundle deploy -t dev
 databricks bundle run novamart_e2e -t dev        # pipeline completo (SF=0.1 por defecto)
 databricks bundle run novamart_daily -t dev      # simula la llegada de un día nuevo
@@ -237,6 +241,11 @@ novamart-lakehouse/
 | [Modelado](docs/03_modelado_de_datos.md) | Kimball, SCD, claves subrogadas, estrella vs OBT vs Data Vault |
 | [Performance](docs/04_performance_y_volumen.md) | técnicas aplicadas, skew, tiempos de referencia |
 | [Despliegue](docs/05_despliegue.md) | bundle, Free Edition, CI/CD, runbooks |
+| [Guía desde la web](docs/06_guia_desde_la_web.md) | paso a paso en el navegador, desde cero, y cómo hacer el repo tuyo |
+| [Bitácora](docs/07_bitacora_primera_ejecucion.md) | primera ejecución real: errores explicados y resultados |
+| [Hacerlo más real](docs/08_hacerlo_mas_real.md) | mejoras técnicas rol por rol y hoja de ruta |
+| [Genie a fondo](docs/09_genie_a_fondo.md) | Genie One, Genie Agents, Agent mode, Genie Code y API |
+| [Prompts Andes](docs/10_prompts_proyectos_andes.md) | plantillas para proyectos de otros negocios |
 | [Diagramas](docs/diagrams/README.md) | 10 diagramas Excalidraw editables + animaciones Excalimate |
 
 <details>
