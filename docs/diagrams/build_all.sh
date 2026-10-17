@@ -19,3 +19,5 @@ for n in 01_arquitectura 09_ruta_aprendizaje; do
 done
 # hero del README: SVG animado (sin JavaScript, funciona en GitHub)
 node src/render_animated_svg.mjs 00_proceso_completo.excalidraw ../animations/proceso_completo.svg
+# hero del README estilo "run de Databricks" (CSS puro)
+python3 src/build_job_svg.py

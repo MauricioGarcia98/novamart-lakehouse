@@ -29,6 +29,13 @@ y las flechas se **dibujan** (`drawProgress`).
 
 Los `.gif` del README se generan con `src/render_frames.mjs` + `src/make_gif.py` (mismo orden de pasos).
 
+### Run animado del job (`../animations/job_run.svg`)
+
+[`src/build_job_svg.py`](src/build_job_svg.py) genera una vista oscura estilo "run de Databricks" del job
+`novamart-e2e-pipeline`: las 8 tareas pasan por pending → running → succeeded, las aristas muestran el flujo,
+el `for_each` de silver procesa sus 8 entidades de a 4, el panel muestra filas escritas por capa y el log de
+cada tarea. Son ~30 KB de SVG + CSS (sin JavaScript).
+
 ### SVG animado (`../animations/proceso_completo.svg`)
 
 `src/render_animated_svg.mjs` exporta cada paso con la librería oficial de Excalidraw usando el mismo encuadre

@@ -16,6 +16,7 @@
 **Un proyecto real, de punta a punta, para aprender Spark, SQL y modelado de datos en Databricks
 — con cientos de millones de filas, datos sucios de verdad y prácticas de producción.**
 
+[En acción](#-el-pipeline-en-acción) ·
 [Proceso](#-el-proceso-completo) ·
 [Arquitectura](#️-arquitectura) ·
 [Modelo de datos](#-modelo-de-datos) ·
@@ -27,7 +28,17 @@
 
 ---
 
-## 🎬 El proceso completo
+## 🎬 El pipeline en acción
+
+<p align="center">
+  <img src="docs/animations/job_run.svg" alt="Ejecución animada del job novamart-e2e-pipeline en Databricks: las 8 tareas pasan de pending a running a succeeded" width="100%">
+</p>
+
+<sub>Ilustración animada del job <code>novamart-e2e-pipeline</code> (<a href="resources/novamart_e2e.job.yml">resources/novamart_e2e.job.yml</a>):
+cada tarea pasa de <i>pending</i> → <i>running</i> → <i>succeeded</i>, el <code>for_each</code> de silver procesa las 8 entidades de a 4
+y el panel muestra las filas que se escriben en cada capa con <code>scale_factor=1</code>.</sub>
+
+## 🧭 El proceso completo
 
 <p align="center">
   <img src="docs/animations/proceso_completo.svg" alt="Proceso completo animado: generar, aterrizar, bronze, silver, gold y consumir" width="100%">
