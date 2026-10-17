@@ -25,7 +25,7 @@ databricks bundle run novamart_e2e -t dev --params scale_factor=0.1
 | job | `novamart-e2e-pipeline` | landing → gold + quality gate |
 | job | `novamart-daily-increment` | genera el día siguiente y dispara el e2e (schedule pausado) |
 | job | `novamart-weekly-maintenance` | diseño físico + OPTIMIZE/VACUUM/ANALYZE |
-| pipeline | `novamart-declarative-pipeline` | versión Lakeflow Declarative (SQL) en el esquema `ldp` |
+| pipeline | `novamart-declarative-pipeline` | versión Lakeflow Declarative (SQL) en el esquema `ldp` (en `dev`: `dev_<usuario>_ldp`) |
 
 `-t dev` crea todo con prefijo `[dev <usuario>]` en el catálogo `novamart_dev`.
 `-t prod` usa `novamart` y `scale_factor=1`.

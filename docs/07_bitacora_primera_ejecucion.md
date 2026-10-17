@@ -75,7 +75,7 @@ nombrar el camino.
 Error: cannot create resources.pipelines.novamart_ldp: Catalog 'novamart_dev' does not exist.
 ```
 
-**En criollo:** el pipeline declarativo escribe en `novamart_dev.ldp`, y Databricks valida eso
+**En criollo:** el pipeline declarativo escribe en un esquema de `novamart_dev` (en dev se llama `dev_<usuario>_ldp`), y Databricks valida eso
 **al crearlo**. El catálogo lo creaba el notebook `00_setup`, pero ese notebook corre **después**
 del deploy. Es el problema del huevo y la gallina.
 
@@ -88,7 +88,7 @@ En Free Edition (*Default Storage*), **la API REST no puede crear catálogos**. 
 
 **Intento 2 (funcionó):**
 1. Crear el catálogo **una vez** por SQL: `CREATE CATALOG IF NOT EXISTS novamart_dev`.
-2. Declarar en el bundle sólo el **esquema** `ldp` (`resources/novamart_catalog.yml`). El
+2. Declarar en el bundle sólo el **esquema** `ldp` (en modo `development` se crea como `dev_nahu98garcia_ldp`) (`resources/novamart_catalog.yml`). El
    pipeline lo referencia (`${resources.schemas.ldp.name}`), y así el bundle sabe que primero
    tiene que crear el esquema y después el pipeline.
 3. Documentarlo en el README y en la [guía web](06_guia_desde_la_web.md) (Paso 3).
@@ -170,6 +170,8 @@ primeras manejalas en el código. A las segundas, con reintentos.
 ---
 
 ## 8 · Repair run: re-ejecutar sólo lo que falló
+
+![Grafo del run reparado: bronze_ingest con 4 attempts](img/ui/09b_run_grafo.png)
 
 En vez de correr todo de nuevo (25 min más de generación), usamos **Repair run**:
 ```bash

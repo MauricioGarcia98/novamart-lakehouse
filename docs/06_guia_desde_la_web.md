@@ -47,7 +47,8 @@
 
 Y una sexta, que es la estrella de este repo:
 
-6. **Asset Bundle (archivo `databricks.yml`):** describe *en código* los jobs, pipelines y esquemas.
+6. **Bundle (archivo `databricks.yml`)** — se llamaba *Asset Bundle* y en 2026 pasó a llamarse
+   *Declarative Automation Bundle* (la UI dice "Connected to Declarative Automation Bundles"): describe *en código* los jobs, pipelines y esquemas.
    En vez de crear el job a mano con clics, el bundle lo crea igual siempre. Eso se llama
    **infraestructura como código**.
 
@@ -81,7 +82,7 @@ Abrí cada menú una vez para ubicarte:
 | **Compute** | Clusters y SQL warehouses | Paso 7 |
 | **SQL Editor** | Escribir consultas SQL | Paso 7 |
 | **Dashboards** | Tableros visuales (AI/BI) | Paso 8 |
-| **Genie** | Preguntar a los datos en lenguaje natural | Paso 9 |
+| **Genie Agents** | Preguntar a los datos en lenguaje natural | Paso 9 |
 
 Arriba a la derecha está tu **usuario** (ícono redondo) → *Settings*: ahí se configuran GitHub,
 tokens y preferencias.
@@ -104,6 +105,9 @@ tokens y preferencias.
    3. **Storage location:** dejá *Default storage* (o vacío).
 4. Clic en **Create**.
 5. Comprobá que aparece `novamart_dev` en el árbol de la izquierda.
+
+   ![Catálogo novamart_dev con sus esquemas](img/ui/02_catalogo.png)
+   > 👀 Así se ve después de correr el job: los esquemas `bronze`, `silver`, `gold`, `landing`, `ops` y `dev_<tu_usuario>_ldp` (el del pipeline declarativo; el prefijo lo agrega el modo `development`).
 
 **Opción B — con SQL:**
 
@@ -149,13 +153,18 @@ El repo trae un `databricks.yml`. Databricks lo reconoce y te deja desplegarlo c
    botón **Open in deployments** o el ícono del cohete en la barra derecha.
 3. En **Target**, elegí **dev**.
 4. Clic en **Deploy**.
-   1. Te muestra qué va a crear: 3 jobs, 1 pipeline y 1 esquema (`ldp`). Confirmá.
+   1. Te muestra qué va a crear: 3 jobs, 1 pipeline y 1 esquema. Confirmá. El esquema se va a
+      llamar `dev_<tu_usuario>_ldp`: en modo `development` el bundle le agrega tu usuario adelante
+      para que tu ambiente de pruebas no pise el de otra persona.
    2. Esperá a que termine (1–2 min). Si falla, el panel muestra el error en rojo.
 5. Cuando termina, el panel lista los recursos creados con el prefijo **`[dev tu_usuario]`**:
    * `[dev …] novamart-e2e-pipeline` (el pipeline completo)
    * `[dev …] novamart-daily-increment` (simula un día nuevo)
    * `[dev …] novamart-weekly-maintenance` (mantenimiento)
    * `[dev …] novamart-declarative-pipeline` (versión SQL declarativa)
+
+![Carpeta del bundle desplegado en el Workspace](img/ui/01_workspace_bundle.png)
+> 👀 El deploy copia el código a `Workspace › Users › <tu email> › .bundle › novamart-lakehouse › dev › files`.
 
 > **¿Qué estoy haciendo?** Lo mismo que `databricks bundle deploy -t dev` por terminal: subir el
 > código y crear los jobs tal cual están definidos en `resources/*.yml`. El modo `development`
@@ -204,15 +213,23 @@ Sirve para ver paso a paso qué pasa en cada capa. Tarda más.
 
 1. Barra lateral → **Jobs & Pipelines**.
 2. Buscá **`[dev tu_usuario] novamart-e2e-pipeline`** y entrá.
+
+   ![Lista de Jobs & Pipelines](img/ui/07_jobs.png)
+   > 👀 Los 4 recursos del bundle con prefijo `[dev …]`. Los que tienen schedule dicen *Paused - Scheduled*: el modo `development` los pausa.
 3. Pestaña **Tasks**: vas a ver el **DAG** (el dibujo de tareas conectadas):
    `setup → should_generate → generate_data → bronze_ingest → silver (x8) → gold_dimensions → gold_facts → gold_marts → data_quality_gate`.
    1. `should_generate` es un **if/else**: si el parámetro `generate` es `true`, genera datos; si no, salta directo a bronze.
    2. `silver` es un **for each**: corre el mismo notebook 8 veces (una por entidad), de a 4 en paralelo.
+
+   ![DAG del job en la pestaña Tasks](img/ui/08_dag.png)
+   > 👀 Mirá las salidas **True/False** de `should_generate`, la etiqueta **If none failed** sobre `bronze_ingest` y el recuadro punteado **silver** (el for each).
 4. Arriba a la derecha: flecha al lado de **Run now** → **Run now with different parameters**.
    1. `catalog` = `novamart_dev`
    2. `scale_factor` = `0.1`
    3. `generate` = `true` (la primera vez **sí** hay que generar datos)
    4. Clic en **Run**.
+   ![Historial de ejecuciones del job](img/ui/09_runs.png)
+   > 👀 Una ejecución de 49 min 31 s, *Succeeded*, con la grilla de tareas en verde.
 5. Pestaña **Runs** → clic en la ejecución → ves cada tarea cambiar de color:
    gris (esperando) → azul (corriendo) → verde (OK) / rojo (falló).
 6. **Si una tarea falla:**
@@ -221,6 +238,13 @@ Sirve para ver paso a paso qué pasa en cada capa. Tarda más.
    3. Volvé al run → botón **Repair run** → marcá las tareas fallidas → **Repair**.
       > *Repair run* re-ejecuta **sólo** lo que falló y lo que depende de eso. No vuelve a generar
       > los datos (te ahorra ~25 min).
+
+   ![Grafo del run reparado](img/ui/09b_run_grafo.png)
+   > 👀 Arriba dice **Repair 1 (latest) · Succeeded**; en `bronze_ingest` se lee **4 attempts** (3 fallidos + el del repair).
+
+   ![Las 8 iteraciones del for each de silver](img/ui/11_silver_foreach.png)
+   > 👀 Cada entidad con su duración; a la derecha **Concurrency 4**: arrancan de a 4 al mismo tiempo.
+
 7. Así se vio la primera ejecución real (con sus fallos y el *repair*):
 
    ![Línea de tiempo real del job](img/charts/01_linea_de_tiempo_run.svg)
@@ -241,6 +265,18 @@ Sirve para ver paso a paso qué pasa en cada capa. Tarda más.
    3. **Lineage:** de qué tablas viene esta tabla (¡mirá cómo llega desde bronze!).
    4. **History:** versiones de la tabla Delta (*time travel*).
 
+   ![Esquema gold con sus 17 tablas](img/ui/03_esquema_gold.png)
+   > 👀 Dimensiones (`dim_`), hechos (`fact_`), marts (`mart_`) y una vista (`v_sales_enriched`). Bronze y silver se ven igual: [bronze](img/ui/03b_esquema_bronze.png) · [silver](img/ui/03c_esquema_silver.png).
+
+   ![Columnas de fact_sales](img/ui/04_fact_sales.png)
+   > 👀 Las columnas con ícono de **llave** (`order_date`, `store_key`) son las de *liquid clustering*. En **Top joins** se ve el modelo estrella en acción.
+
+   ![Linaje de fact_sales](img/ui/05_lineage.png)
+   > 👀 Todo lo que depende de `fact_sales` (*Downstream*). Cambiá a *Upstream* o abrí **See lineage graph** para ver de dónde viene.
+
+   ![Volumen landing/raw con los archivos crudos](img/ui/06_volumen_landing.png)
+   > 👀 Las 8 carpetas de archivos crudos que lee Auto Loader en bronze.
+
 **En el SQL Editor:**
 
 1. **SQL Editor** → **+ New query** → warehouse *Serverless Starter Warehouse*.
@@ -260,6 +296,9 @@ Sirve para ver paso a paso qué pasa en cada capa. Tarda más.
    SELECT table_name, failed_rules, record FROM novamart_dev.ops.quarantine LIMIT 20;
    ```
    > Si una columna no existe con ese nombre, abrí la tabla en el Catálogo (Overview) y ajustá.
+
+   ![SQL Editor con la consulta de ventas por año](img/ui/13_sql_editor.png)
+   > 👀 Resultado real: 496,3 · 589,2 · 690,4 millones.
 4. Seguí con la **ruta de aprendizaje**: carpeta `learning/`, desde `00_bienvenida_y_entorno`.
 
 ---
@@ -280,7 +319,12 @@ Sirve para ver paso a paso qué pasa en cada capa. Tarda más.
 
 ## Paso 9 · Crear un Genie Agent (preguntar en lenguaje natural)
 
-1. Barra lateral → **Genie** → **New** (antes se llamaba *Genie space*).
+1. Barra lateral → **Genie Agents** (sección SQL) → **New** (antes se llamaba *Genie space*).
+   Se abre **Connect your data** para elegir las tablas:
+
+   ![Ventana Connect your data de Genie Agents](img/ui/14_genie.png)
+   > 👀 También podés elegir **Metric views** (pestaña de arriba): son las métricas oficiales del negocio.
+
 2. **Data sources:** agregá pocas tablas bien elegidas (5–10):
    `gold.fact_sales`, `gold.dim_date`, `gold.dim_product`, `gold.dim_store`, `gold.dim_customer`, `gold.mart_sales_daily`.
 3. **Instructions:** escribí reglas de negocio cortas, por ejemplo:
@@ -306,6 +350,10 @@ Sirve para ver paso a paso qué pasa en cada capa. Tarda más.
 3. Compará con la versión de notebooks: mismo resultado, otro estilo (declarativo vs imperativo).
    Es el módulo 14 de la ruta de aprendizaje.
 4. En Free Edition hay **un pipeline activo por tipo** a la vez: esperá que termine antes de otro.
+
+   ![Pipeline declarativo con una ejecución cancelada](img/ui/12_pipeline_cancelado.png)
+   > 👀 Si cancelás la ejecución antes de que arranque, el grafo no se dibuja (*Pipeline run canceled*). Dejala terminar (5–15 min) para ver las tablas.
+
 
 ---
 
