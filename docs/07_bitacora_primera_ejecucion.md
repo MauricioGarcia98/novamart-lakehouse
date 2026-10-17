@@ -182,6 +182,12 @@ código ya corregido.
 
 ## 9 · Resultado final ✅
 
+![Línea de tiempo real del job: bronze falla 3 veces, el repair run lo re-ejecuta y todo termina OK a los 50 min](img/charts/01_linea_de_tiempo_run.svg)
+
+> **Cómo leerla:** cada fila es una tarea y cada barra, un intento. Las rojas rayadas son los
+> fallos de bronze (secciones 6 y 7). Los rombos grises son tareas **omitidas** porque falló una
+> anterior. La línea punteada marca el *repair run*: desde ahí, todo en verde.
+
 | Tarea | Estado | Duración |
 |---|---|---|
 | setup | ✅ SUCCESS | 63 s |
@@ -196,6 +202,8 @@ código ya corregido.
 
 ### Filas por capa (`scale_factor = 0.1`)
 
+![Filas por tabla en silver](img/charts/02_filas_silver.svg)
+
 | Entidad | Bronze | Silver | Gold |
 |---|---:|---:|---:|
 | Clientes | 209.836 | 209.285 (historia SCD2) | `dim_customer` 209.286 |
@@ -208,12 +216,16 @@ código ya corregido.
 | Eventos web | 14.009.762 | 14.009.762 | `fact_web_sessions` 2.499.992 |
 | Stock (snapshots) | 1.570.000 | 1.570.000 | `fact_inventory_snapshot` 1.570.000 |
 
+![Pedidos de bronze a silver: 1.203.610 − 3.599 duplicados − 701 en cuarentena = 1.199.310](img/charts/03_pedidos_bronze_a_silver.svg)
+
 **¿Por qué bronze tiene más filas que silver?** Porque silver **deduplica** (el generador mete
 pedidos repetidos a propósito) y manda los registros inválidos a **cuarentena**. Las dimensiones
 tienen +1 fila: es el miembro "desconocido" (`-1`), al que apuntan los hechos sin cliente/tienda.
 
 **Marts:** `mart_sales_daily` 304.076 · `mart_customer_rfm` 93.441 · `mart_funnel_daily` 57.535 ·
 `mart_cohort_retention` 666 · `mart_product_affinity` 630.
+
+![Ventas netas por año](img/charts/04_ventas_por_anio.svg)
 
 **Ventas netas** (`fact_sales.net_amount`): 2023 = 496,3 M · 2024 = 589,2 M · 2025 = 690,4 M
 (total 1.775,9 M sobre 1.199.054 pedidos).

@@ -221,7 +221,11 @@ Sirve para ver paso a paso qué pasa en cada capa. Tarda más.
    3. Volvé al run → botón **Repair run** → marcá las tareas fallidas → **Repair**.
       > *Repair run* re-ejecuta **sólo** lo que falló y lo que depende de eso. No vuelve a generar
       > los datos (te ahorra ~25 min).
-7. Tiempos reales de la primera ejecución con `scale_factor=0.1` en Free Edition:
+7. Así se vio la primera ejecución real (con sus fallos y el *repair*):
+
+   ![Línea de tiempo real del job](img/charts/01_linea_de_tiempo_run.svg)
+
+8. Tiempos reales de la primera ejecución con `scale_factor=0.1` en Free Edition:
    setup 1 min · generate_data 25 min · bronze 3 min · silver 2,5 min · gold ~2,5 min · calidad 12 s.
 
 ---
