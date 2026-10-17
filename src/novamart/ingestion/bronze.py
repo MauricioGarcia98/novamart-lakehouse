@@ -22,6 +22,9 @@ from novamart.config import ProjectConfig, is_databricks
 
 _S = T.StringType()
 
+# Reinicios por evolución de esquema, uno por cada tanda de columnas nuevas.
+_SCHEMA_EVOLUTION_RESTARTS = 3
+
 # Contratos explícitos para CSV: en CSV el esquema es posicional y todo es texto.
 # Los tipos reales se aplican en silver, donde se valida cada columna.
 CSV_CONTRACTS = {
@@ -105,15 +108,24 @@ def ingest_source(spark: SparkSession, cfg: ProjectConfig, name: str) -> int:
     """Ingesta incremental landing/<name> -> bronze.<name>. Devuelve filas nuevas."""
     target = cfg.table("bronze", name)
     before = spark.table(target).count() if spark.catalog.tableExists(target) else 0
-    query = (
-        add_lineage(read_landing_stream(spark, cfg, name))
-        .writeStream.format("delta")
-        .option("checkpointLocation", cfg.checkpoint_path(f"bronze_{name}"))
-        .option("mergeSchema", "true")  # acepta columnas nuevas (schema evolution)
-        .trigger(availableNow=True)
-        .toTable(target)
-    )
-    query.awaitTermination()
+    for attempt in range(_SCHEMA_EVOLUTION_RESTARTS + 1):
+        query = (
+            add_lineage(read_landing_stream(spark, cfg, name))
+            .writeStream.format("delta")
+            .option("checkpointLocation", cfg.checkpoint_path(f"bronze_{name}"))
+            .option("mergeSchema", "true")  # acepta columnas nuevas (schema evolution)
+            .trigger(availableNow=True)
+            .toTable(target)
+        )
+        try:
+            query.awaitTermination()
+            break
+        except Exception as exc:
+            # Auto Loader (addNewColumns) detiene el stream al detectar columnas nuevas,
+            # después de guardar el esquema ampliado: reiniciarlo retoma con ese esquema.
+            if "UNKNOWN_FIELD_EXCEPTION" not in str(exc) or attempt == _SCHEMA_EVOLUTION_RESTARTS:
+                raise
+            print(f"{name}: columnas nuevas detectadas, reiniciando el stream ({attempt + 1})")
     return spark.table(target).count() - before
 
 

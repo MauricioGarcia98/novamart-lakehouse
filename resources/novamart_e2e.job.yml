@@ -47,7 +47,8 @@ resources:
         - task_key: bronze_ingest
           depends_on: [{ task_key: generate_data }, { task_key: should_generate, outcome: "false" }]
           run_if: NONE_FAILED
-          # Auto Loader detiene el stream una vez cuando detecta columnas nuevas: el reintento lo retoma
+          # Auto Loader detiene el stream al detectar columnas nuevas: bronze.py lo reinicia;
+          # estos reintentos cubren fallas transitorias
           max_retries: 2
           min_retry_interval_millis: 10000
           notebook_task:
