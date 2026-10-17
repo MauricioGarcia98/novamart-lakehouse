@@ -40,8 +40,7 @@ cada tarea. Son ~30 KB de SVG + CSS (sin JavaScript).
 
 `src/render_animated_svg.mjs` exporta cada paso con la librería oficial de Excalidraw usando el mismo encuadre
 y los une en **un único SVG** con animaciones CSS: cada etapa aparece y sus trazos se dibujan a mano
-(`stroke-dashoffset` con `pathLength=1`). No usa JavaScript, así que GitHub lo muestra animado dentro del README,
-y respeta `prefers-reduced-motion`.
+(`stroke-dashoffset` con `pathLength=1`). No usa JavaScript, así que GitHub lo muestra animado dentro del README.
 
 ## Diagramas como código
 

@@ -104,7 +104,6 @@
     @keyframes cnt6{0.00%{opacity:0} 63.00%{opacity:1} 73.00%{opacity:0}}
     @keyframes cnt7{0.00%{opacity:0} 73.00%{opacity:1} 83.00%{opacity:0}}
     @keyframes cnt8{0.00%{opacity:0} 83.00%{opacity:1} 95.00%{opacity:0}}
-    @media (prefers-reduced-motion: reduce){ *{animation:none !important} }
   </style>
 
   <!-- ventana -->

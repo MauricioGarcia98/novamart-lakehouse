@@ -248,7 +248,6 @@ def render(css: list[str], body: list[str]) -> str:
     @keyframes rot{{to{{transform:rotate(360deg)}}}}
     @keyframes march{{to{{stroke-dashoffset:-48}}}}
     {chr(10).join("    " + c for c in css).strip()}
-    @media (prefers-reduced-motion: reduce){{ *{{animation:none !important}} }}
   </style>
 
   <!-- ventana -->

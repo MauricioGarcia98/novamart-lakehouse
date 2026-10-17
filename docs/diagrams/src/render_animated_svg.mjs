@@ -7,7 +7,7 @@
 //   2. Exporta cada paso por separado con el MISMO encuadre (dos anclas invisibles fijan el viewBox).
 //   3. Une todo en un solo <svg>: cada paso es un <g class="sN"> con CSS que lo hace aparecer
 //      (fade + desplazamiento) y "dibuja" sus trazos (stroke-dashoffset con pathLength=1).
-// El resultado funciona como <img> en GitHub, sin JavaScript, y respeta prefers-reduced-motion.
+// El resultado funciona como <img> en GitHub, sin JavaScript.
 import { chromium } from "playwright-core";
 import fs from "fs";
 import http from "http";
@@ -90,8 +90,6 @@ for (const [i, k] of steps.entries()) {
   }
   groups += `<g class="st s${i}">${strip(svg)}</g>\n`;
 }
-css += `
-  @media (prefers-reduced-motion: reduce) { .st, .st path { animation: none !important; opacity: 1; stroke-dashoffset: 0; } }`;
 
 const result = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${viewBox}" width="${vw}" height="${vh}" role="img" aria-label="${path.basename(inp, ".excalidraw")}">
 <!-- Generado con Excalidraw + docs/diagrams/src/render_animated_svg.mjs -->

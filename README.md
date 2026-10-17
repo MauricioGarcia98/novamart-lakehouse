@@ -1,8 +1,17 @@
 <div align="center">
 
-<img src="docs/animations/banner.svg" alt="NovaMart Lakehouse" width="100%">
+# 🛒 NovaMart Lakehouse
 
-<br>
+**Un proyecto real, de punta a punta, para aprender Spark, SQL y modelado de datos en Databricks
+— con cientos de millones de filas, datos sucios de verdad y prácticas de producción.**
+
+<img src="docs/animations/job_run.svg" alt="Ejecución animada del job novamart-e2e-pipeline en Databricks: las 8 tareas pasan de pending a running a succeeded" width="100%">
+
+<sub>Ilustración animada del job <code>novamart-e2e-pipeline</code> (<a href="resources/novamart_e2e.job.yml">resources/novamart_e2e.job.yml</a>):
+cada tarea pasa de <i>pending</i> → <i>running</i> → <i>succeeded</i>, el <code>for_each</code> de silver procesa las 8 entidades de a 4
+y el panel muestra las filas que se escriben en cada capa con <code>scale_factor=1</code>.</sub>
+
+<br><br>
 
 [![CI/CD](https://github.com/MauricioGarcia98/novamart-lakehouse/actions/workflows/ci.yml/badge.svg)](https://github.com/MauricioGarcia98/novamart-lakehouse/actions/workflows/ci.yml)
 ![Databricks](https://img.shields.io/badge/Databricks-Lakehouse-FF3621?logo=databricks&logoColor=white)
@@ -13,10 +22,6 @@
 ![Python](https://img.shields.io/badge/Python-3.10+-3776AB?logo=python&logoColor=white)
 ![License](https://img.shields.io/badge/license-MIT-2f9e44)
 
-**Un proyecto real, de punta a punta, para aprender Spark, SQL y modelado de datos en Databricks
-— con cientos de millones de filas, datos sucios de verdad y prácticas de producción.**
-
-[En acción](#-el-pipeline-en-acción) ·
 [Proceso](#-el-proceso-completo) ·
 [Arquitectura](#️-arquitectura) ·
 [Modelo de datos](#-modelo-de-datos) ·
@@ -27,16 +32,6 @@
 </div>
 
 ---
-
-## 🎬 El pipeline en acción
-
-<p align="center">
-  <img src="docs/animations/job_run.svg" alt="Ejecución animada del job novamart-e2e-pipeline en Databricks: las 8 tareas pasan de pending a running a succeeded" width="100%">
-</p>
-
-<sub>Ilustración animada del job <code>novamart-e2e-pipeline</code> (<a href="resources/novamart_e2e.job.yml">resources/novamart_e2e.job.yml</a>):
-cada tarea pasa de <i>pending</i> → <i>running</i> → <i>succeeded</i>, el <code>for_each</code> de silver procesa las 8 entidades de a 4
-y el panel muestra las filas que se escriben en cada capa con <code>scale_factor=1</code>.</sub>
 
 ## 🧭 El proceso completo
 
