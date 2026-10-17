@@ -2,6 +2,12 @@
 # MAGIC %md
 # MAGIC # 01 · Generación de datos a gran escala
 # MAGIC
+# MAGIC > **¿Para qué existe este paso?** Simular los 8 sistemas de origen de NovaMart (caja, web, stock…) escribiendo archivos en *landing*, como lo harían en una empresa real.
+# MAGIC >
+# MAGIC > **¿Qué pasaría si no existiera?** No habría datos: en la vida real este paso no existe porque los sistemas mandan sus archivos solos.
+# MAGIC >
+# MAGIC > Explicación completa: [`docs/11_por_que_asi.md`](../docs/11_por_que_asi.md#entrada) · glosario: [`docs/12_glosario.md`](../docs/12_glosario.md)
+# MAGIC
 # MAGIC El generador corre **distribuido en Spark** (no en el driver): cada fila se calcula con
 # MAGIC `xxhash64(id, sal)`, así que es determinístico y escala linealmente con el cluster.
 # MAGIC

@@ -16,7 +16,7 @@ _src = os.path.abspath(os.path.join(os.getcwd(), "..", "src"))
 if _src not in sys.path:
     sys.path.insert(0, _src)
 
-dbutils.widgets.text("catalog", "novamart", "Catálogo UC")
+dbutils.widgets.text("catalog", "novamart_dev", "Catálogo UC")
 dbutils.widgets.text("scale_factor", "0.1", "Scale factor")
 dbutils.widgets.text("start_date", "2023-01-01", "Fecha inicio")
 dbutils.widgets.text("end_date", "2025-12-31", "Fecha fin")

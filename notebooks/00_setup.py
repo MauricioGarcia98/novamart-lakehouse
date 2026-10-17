@@ -2,6 +2,12 @@
 # MAGIC %md
 # MAGIC # 00 · Setup: catálogo, esquemas y volumen
 # MAGIC
+# MAGIC > **¿Para qué existe este paso?** Crear el "archivero" (catálogo, esquemas por capa, volumen de llegada y tablas de auditoría) antes de que llegue cualquier dato.
+# MAGIC >
+# MAGIC > **¿Qué pasaría si no existiera?** Las tareas paralelas de silver intentarían crear las mismas tablas de `ops` a la vez y una fallaría (condición de carrera).
+# MAGIC >
+# MAGIC > Explicación completa: [`docs/11_por_que_asi.md`](../docs/11_por_que_asi.md#codigo) · glosario: [`docs/12_glosario.md`](../docs/12_glosario.md)
+# MAGIC
 # MAGIC Crea la estructura de **Unity Catalog** del proyecto:
 # MAGIC
 # MAGIC | Objeto | Nombre | Para qué |

@@ -1,6 +1,12 @@
 # Databricks notebook source
 # MAGIC %md
 # MAGIC # 07 · Quality gate
+# MAGIC
+# MAGIC > **¿Para qué existe este paso?** Ser la última barrera: el job falla si los números no tienen sentido, antes de que alguien los vea.
+# MAGIC >
+# MAGIC > **¿Qué pasaría si no existiera?** El pipeline podría terminar "verde" con ventas en cero por un join mal hecho, y nadie se enteraría.
+# MAGIC >
+# MAGIC > Explicación completa: [`docs/11_por_que_asi.md`](../docs/11_por_que_asi.md#calidad) · glosario: [`docs/12_glosario.md`](../docs/12_glosario.md)
 # MAGIC El Job **falla** si se rompe alguna invariante del modelo. Es la última barrera antes de que
 # MAGIC los dashboards muestren datos incorrectos.
 

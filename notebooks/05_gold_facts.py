@@ -2,6 +2,12 @@
 # MAGIC %md
 # MAGIC # 05 · Gold: tablas de hechos
 # MAGIC
+# MAGIC > **¿Para qué existe este paso?** Construir las tablas de hechos (lo que pasó y se mide), procesando sólo las fechas afectadas.
+# MAGIC >
+# MAGIC > **¿Qué pasaría si no existiera?** Cada día se recalcularían años de ventas, y cada reintento podría duplicarlas.
+# MAGIC >
+# MAGIC > Explicación completa: [`docs/11_por_que_asi.md`](../docs/11_por_que_asi.md#rendimiento) · glosario: [`docs/12_glosario.md`](../docs/12_glosario.md)
+# MAGIC
 # MAGIC | fact | tipo Kimball | grano | carga |
 # MAGIC |---|---|---|---|
 # MAGIC | `fact_sales` | transaccional | línea de pedido | `replaceWhere` por fechas afectadas |

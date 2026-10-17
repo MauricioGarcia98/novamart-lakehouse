@@ -1,6 +1,12 @@
 # Databricks notebook source
 # MAGIC %md
 # MAGIC # 10 · Simular la llegada de un día nuevo
+# MAGIC
+# MAGIC > **¿Para qué existe este paso?** Simular que llega un día nuevo, para practicar y verificar la carga incremental.
+# MAGIC >
+# MAGIC > **¿Qué pasaría si no existiera?** No habría forma de probar que el pipeline procesa sólo lo nuevo (y que no duplica nada).
+# MAGIC >
+# MAGIC > Explicación completa: [`docs/11_por_que_asi.md`](../docs/11_por_que_asi.md#operacion) · glosario: [`docs/12_glosario.md`](../docs/12_glosario.md)
 # MAGIC Genera los archivos de **un solo día** (el siguiente al último procesado) en modo incremental.
 # MAGIC Después el Job dispara el pipeline completo, que sólo procesa lo nuevo.
 

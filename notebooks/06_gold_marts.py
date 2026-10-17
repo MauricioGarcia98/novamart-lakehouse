@@ -1,6 +1,12 @@
 # Databricks notebook source
 # MAGIC %md
 # MAGIC # 06 · Gold: marts en SQL
+# MAGIC
+# MAGIC > **¿Para qué existe este paso?** Precalcular las respuestas a las preguntas frecuentes del negocio (ventas diarias, RFM, cohortes, embudo).
+# MAGIC >
+# MAGIC > **¿Qué pasaría si no existiera?** Cada tablero recalcularía todo al abrirse: lento y caro.
+# MAGIC >
+# MAGIC > Explicación completa: [`docs/11_por_que_asi.md`](../docs/11_por_que_asi.md#rendimiento) · glosario: [`docs/12_glosario.md`](../docs/12_glosario.md)
 # MAGIC Ejecuta en orden los scripts de `sql/gold/marts/` (ventas diarias, RFM, cohortes, afinidad de productos,
 # MAGIC embudo web y la vista desnormalizada `v_sales_enriched`).
 
