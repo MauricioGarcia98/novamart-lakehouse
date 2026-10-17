@@ -247,6 +247,32 @@ frenar todo.
 
 ---
 
+## 10 · Prueba del incremental: job `novamart-daily-increment` ✅
+
+El job diario simula que **llega un día nuevo**: genera los archivos del día siguiente al último
+procesado (2026-01-01) y dispara el e2e con `generate=false`.
+
+| Tarea | Estado | Duración |
+|---|---|---|
+| generate_next_day | ✅ SUCCESS | 83 s |
+| run_pipeline → e2e (`generate=false`) | ✅ SUCCESS | 416 s (~7 min, contra ~50 min de la carga completa) |
+| ↳ generate_data | ⏭️ EXCLUDED (la condición dio `false`, como corresponde) | — |
+| ↳ bronze → silver → gold → calidad | ✅ SUCCESS | 105 + 138 + 127 + 12 s |
+
+| Tabla | Antes | Después | Diferencia |
+|---|---:|---:|---:|
+| `bronze.orders` | 1.203.610 | 1.204.598 | +988 |
+| `silver.orders` | 1.199.310 | 1.200.294 | +984 |
+| `gold.fact_sales` | 2.816.655 | 2.819.050 | +2.395 |
+| `bronze.web_events` | 14.009.762 | 14.021.352 | +11.590 |
+
+**Qué demuestra:**
+* **Incremental de verdad:** `fact_sales` creció exactamente en las 2.395 líneas del 2026-01-01.
+  No se re-procesó ni se duplicó nada (0 `order_id` repetidos en silver). Lo logran los
+  *checkpoints* de Auto Loader en bronze y los `MERGE` / `replaceWhere` en silver y gold.
+* **El arreglo del if/else funciona por las dos ramas:** con `generate=false`, `generate_data` quedó
+  *excluida* y `bronze_ingest` corrió igual (gracias a `outcome: "false"` + `run_if: NONE_FAILED`).
+
 ## Glosario rápido de lo que apareció
 
 | Término | Qué es |
