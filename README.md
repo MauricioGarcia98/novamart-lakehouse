@@ -241,6 +241,11 @@ novamart-lakehouse/
 | [Modelado](docs/03_modelado_de_datos.md) | Kimball, SCD, claves subrogadas, estrella vs OBT vs Data Vault |
 | [Performance](docs/04_performance_y_volumen.md) | técnicas aplicadas, skew, tiempos de referencia |
 | [Despliegue](docs/05_despliegue.md) | bundle, Free Edition, CI/CD, runbooks |
+| [Guía desde la web](docs/06_guia_desde_la_web.md) | paso a paso en el navegador, desde cero, y cómo hacer el repo tuyo |
+| [Bitácora](docs/07_bitacora_primera_ejecucion.md) | primera ejecución real: errores explicados y resultados |
+| [Hacerlo más real](docs/08_hacerlo_mas_real.md) | mejoras técnicas rol por rol y hoja de ruta |
+| [Genie a fondo](docs/09_genie_a_fondo.md) | Genie One, Genie Agents, Agent mode, Genie Code y API |
+| [Prompts Andes](docs/10_prompts_proyectos_andes.md) | plantillas para proyectos de otros negocios |
 | [Diagramas](docs/diagrams/README.md) | 10 diagramas Excalidraw editables + animaciones Excalimate |
 
 <details>

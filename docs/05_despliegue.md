@@ -13,6 +13,8 @@
 ```bash
 cd novamart-lakehouse
 databricks auth login --host https://<workspace>
+# una sola vez (Default Storage no permite crear catálogos por API):
+#   CREATE CATALOG IF NOT EXISTS novamart_dev   -- desde el SQL Editor
 databricks bundle validate
 databricks bundle deploy -t dev
 databricks bundle run novamart_e2e -t dev --params scale_factor=0.1
@@ -29,6 +31,8 @@ databricks bundle run novamart_e2e -t dev --params scale_factor=0.1
 `-t prod` usa `novamart` y `scale_factor=1`.
 
 ## Sin CLI (Git folder)
+
+> Guía detallada con sub-pasos: [06_guia_desde_la_web.md](06_guia_desde_la_web.md).
 
 1. *Workspace → Create → Git folder* con la URL del repositorio.
 2. Abrir `novamart-lakehouse/notebooks/00_setup` y ejecutar en orden hasta `07_data_quality_report`
