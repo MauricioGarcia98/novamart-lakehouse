@@ -55,7 +55,7 @@ como producto terminado.
 
 > **Por qué así:** si algo sale mal en silver, no hay que volver a pedirle los datos a nadie,
 > porque bronze tiene la copia original. Cada capa protege a la siguiente. Lo explicamos a fondo
-> en [12 · Por qué así y no de otra manera](12_por_que_asi.md).
+> en [11 · Por qué así y no de otra manera](11_por_que_asi.md).
 
 ---
 
@@ -76,7 +76,7 @@ empresa real.
    resultados se pueden comparar con los de la guía.
 
 En una empresa real, en lugar del generador habría **conectores** a los sistemas de verdad. Más en
-[11 · Preguntas frecuentes](11_preguntas_frecuentes.md#datos).
+[10 · Preguntas frecuentes](10_preguntas_frecuentes.md#datos).
 
 ---
 
@@ -84,9 +84,9 @@ En una empresa real, en lugar del generador habría **conectores** a los sistema
 
 | Si sos… | Leé en este orden | Tiempo |
 |---|---|---|
-| 🧑‍🎓 **Principiante total** ("no sé nada") | Este doc → [Glosario](13_glosario.md) → [Preguntas frecuentes](11_preguntas_frecuentes.md) → [Guía desde la web](06_guia_desde_la_web.md) (hacela de verdad) → [Bitácora](07_bitacora_primera_ejecucion.md) → [Autoevaluación](14_autoevaluacion.md) | 1–2 semanas |
-| 🛠️ **Futuro Data Engineer** (sabés algo de SQL o Python) | Este doc → [Por qué así](12_por_que_asi.md) → [Arquitectura](01_arquitectura.md) → [Fuentes](02_fuentes_y_datos.md) → [Modelado](03_modelado_de_datos.md) → ruta [`learning/`](../learning/README.md) → leer `src/` | 4–8 semanas |
-| 👔 **Recruiter o entrevistador** | [Cómo contar este proyecto](15_como_contarlo.md) → [Bitácora](07_bitacora_primera_ejecucion.md) → [Arquitectura](01_arquitectura.md) | 15 minutos |
+| 🧑‍🎓 **Principiante total** ("no sé nada") | Este doc → [Glosario](12_glosario.md) → [Preguntas frecuentes](10_preguntas_frecuentes.md) → [Guía desde la web](06_guia_desde_la_web.md) (hacela de verdad) → [Bitácora](07_bitacora_primera_ejecucion.md) → [Autoevaluación](13_autoevaluacion.md) | 1–2 semanas |
+| 🛠️ **Futuro Data Engineer** (sabés algo de SQL o Python) | Este doc → [Por qué así](11_por_que_asi.md) → [Arquitectura](01_arquitectura.md) → [Fuentes](02_fuentes_y_datos.md) → [Modelado](03_modelado_de_datos.md) → ruta [`learning/`](../learning/README.md) → leer `src/` | 4–8 semanas |
+| 👔 **Recruiter o entrevistador** | [Cómo contar este proyecto](14_como_contarlo.md) → [Bitácora](07_bitacora_primera_ejecucion.md) → [Arquitectura](01_arquitectura.md) | 15 minutos |
 | 📊 **Analista / usuario de negocio** | Este doc → [Guía, Pasos 7 a 9](06_guia_desde_la_web.md#paso-7--explorar-los-datos) → [Genie a fondo](09_genie_a_fondo.md) | 1 día |
 
 ---
@@ -119,12 +119,12 @@ Seguir pasos no te enseña: copiar comandos que funcionan no te deja nada. Estas
    bronze? ¿Por qué?" Después compará con el resultado real. Equivocarte acá es lo que más enseña.
 2. **Preguntate "¿qué pasaría si no existiera esto?"** Para cada capa, tabla o regla. Si la
    respuesta es "nada", no la entendiste todavía. Las respuestas están en
-   [Por qué así](12_por_que_asi.md).
+   [Por qué así](11_por_que_asi.md).
 3. **Rompé cosas a propósito** (en dev). Borrá una regla de calidad y mirá qué entra a gold.
    Cambiá `scale_factor` y mirá qué tarda más. La [bitácora](07_bitacora_primera_ejecucion.md)
    muestra cómo se leen los errores.
 4. **Explicalo en voz alta.** Si no podés explicarle a otra persona por qué existe silver, volvé a
-   leer. La [autoevaluación](14_autoevaluacion.md) tiene preguntas para eso.
+   leer. La [autoevaluación](13_autoevaluacion.md) tiene preguntas para eso.
 
 ---
 

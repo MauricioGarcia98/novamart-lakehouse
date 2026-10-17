@@ -1,4 +1,4 @@
-# 14 · Autoevaluación: ¿entendiste el proyecto o sólo seguiste pasos?
+# 13 · Autoevaluación: ¿entendiste el proyecto o sólo seguiste pasos?
 
 > **Cómo usar esta página:** respondé cada pregunta **en voz alta o por escrito antes de abrir la
 > respuesta**. Intentar recordar, aunque te equivoques, fija el conocimiento mucho más que releer.

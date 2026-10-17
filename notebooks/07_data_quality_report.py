@@ -6,7 +6,7 @@
 # MAGIC >
 # MAGIC > **¿Qué pasaría si no existiera?** El pipeline podría terminar "verde" con ventas en cero por un join mal hecho, y nadie se enteraría.
 # MAGIC >
-# MAGIC > Explicación completa: [`docs/12_por_que_asi.md`](../docs/12_por_que_asi.md#calidad) · glosario: [`docs/13_glosario.md`](../docs/13_glosario.md)
+# MAGIC > Explicación completa: [`docs/11_por_que_asi.md`](../docs/11_por_que_asi.md#calidad) · glosario: [`docs/12_glosario.md`](../docs/12_glosario.md)
 # MAGIC El Job **falla** si se rompe alguna invariante del modelo. Es la última barrera antes de que
 # MAGIC los dashboards muestren datos incorrectos.
 

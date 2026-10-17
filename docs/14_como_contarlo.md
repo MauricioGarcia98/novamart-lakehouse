@@ -1,4 +1,4 @@
-# 15 · Cómo contar este proyecto (para entrevistas y recruiters)
+# 14 · Cómo contar este proyecto (para entrevistas y recruiters)
 
 > Para dos públicos: **quien hizo el proyecto** y tiene que contarlo en una entrevista, y **quien
 > evalúa** (recruiter o entrevistador técnico) y quiere saber qué demuestra en 15 minutos.
@@ -80,13 +80,13 @@ Usá esta estructura (**contexto → problema → qué hice → resultado → qu
 
 | Pregunta | Dónde repasarla |
 |---|---|
-| ¿Por qué arquitectura medallion? | [Por qué así, C1](12_por_que_asi.md#capas) |
-| ¿Diferencia entre SCD1 y SCD2? ¿Cuándo usarías cada uno? | [Por qué así, E2](12_por_que_asi.md#modelado) |
-| ¿Cómo funciona Auto Loader? ¿Qué es un checkpoint? | [Glosario](13_glosario.md) + `learning/12_structured_streaming.py` |
-| ¿MERGE o replaceWhere? ¿Cuándo cada uno? | [Por qué así, C5 y F1](12_por_que_asi.md#rendimiento) |
+| ¿Por qué arquitectura medallion? | [Por qué así, C1](11_por_que_asi.md#capas) |
+| ¿Diferencia entre SCD1 y SCD2? ¿Cuándo usarías cada uno? | [Por qué así, E2](11_por_que_asi.md#modelado) |
+| ¿Cómo funciona Auto Loader? ¿Qué es un checkpoint? | [Glosario](12_glosario.md) + `learning/12_structured_streaming.py` |
+| ¿MERGE o replaceWhere? ¿Cuándo cada uno? | [Por qué así, C5 y F1](11_por_que_asi.md#rendimiento) |
 | ¿Qué es el skew y cómo lo resolvés? | `learning/10_spark_performance_internals.py` |
-| ¿Particiones o liquid clustering? | [Por qué así, F2](12_por_que_asi.md#rendimiento) |
-| ¿Cómo testeás un pipeline de Spark? | `tests/` + [Por qué así, G2](12_por_que_asi.md#codigo) |
+| ¿Particiones o liquid clustering? | [Por qué así, F2](11_por_que_asi.md#rendimiento) |
+| ¿Cómo testeás un pipeline de Spark? | `tests/` + [Por qué así, G2](11_por_que_asi.md#codigo) |
 | ¿Cómo desplegás a producción? | [Despliegue](05_despliegue.md) + `.github/workflows/ci.yml` |
 | ¿Cómo prepararías los datos para Genie? | [Genie a fondo, sección 2](09_genie_a_fondo.md) |
 

@@ -6,7 +6,7 @@
 # MAGIC >
 # MAGIC > **¿Qué pasaría si no existiera?** No habría forma de probar que el pipeline procesa sólo lo nuevo (y que no duplica nada).
 # MAGIC >
-# MAGIC > Explicación completa: [`docs/12_por_que_asi.md`](../docs/12_por_que_asi.md#operacion) · glosario: [`docs/13_glosario.md`](../docs/13_glosario.md)
+# MAGIC > Explicación completa: [`docs/11_por_que_asi.md`](../docs/11_por_que_asi.md#operacion) · glosario: [`docs/12_glosario.md`](../docs/12_glosario.md)
 # MAGIC Genera los archivos de **un solo día** (el siguiente al último procesado) en modo incremental.
 # MAGIC Después el Job dispara el pipeline completo, que sólo procesa lo nuevo.
 

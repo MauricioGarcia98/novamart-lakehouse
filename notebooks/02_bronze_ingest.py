@@ -6,7 +6,7 @@
 # MAGIC >
 # MAGIC > **¿Qué pasaría si no existiera?** Un error en la limpieza obligaría a releer todos los archivos (si todavía existen); y cada día se releerían años de datos.
 # MAGIC >
-# MAGIC > Explicación completa: [`docs/12_por_que_asi.md`](../docs/12_por_que_asi.md#capas) · glosario: [`docs/13_glosario.md`](../docs/13_glosario.md)
+# MAGIC > Explicación completa: [`docs/11_por_que_asi.md`](../docs/11_por_que_asi.md#capas) · glosario: [`docs/12_glosario.md`](../docs/12_glosario.md)
 # MAGIC
 # MAGIC ```
 # MAGIC landing/<fuente>/ingest_date=.../*.json  ──Auto Loader──▶  bronze.<fuente>  (Delta)

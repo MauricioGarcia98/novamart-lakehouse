@@ -6,7 +6,7 @@
 # MAGIC >
 # MAGIC > **¿Qué pasaría si no existiera?** Los re-envíos duplicarían ventas, las cantidades negativas restarían plata y un cliente que se muda "movería" su historia.
 # MAGIC >
-# MAGIC > Explicación completa: [`docs/12_por_que_asi.md`](../docs/12_por_que_asi.md#calidad) · glosario: [`docs/13_glosario.md`](../docs/13_glosario.md)
+# MAGIC > Explicación completa: [`docs/11_por_que_asi.md`](../docs/11_por_que_asi.md#calidad) · glosario: [`docs/12_glosario.md`](../docs/12_glosario.md)
 # MAGIC
 # MAGIC Este notebook se ejecuta **una vez por entidad** gracias a un `for_each_task` del Job
 # MAGIC (8 entidades, 4 en paralelo). Patrón por micro-lote:

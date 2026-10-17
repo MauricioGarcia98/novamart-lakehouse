@@ -6,7 +6,7 @@
 # MAGIC >
 # MAGIC > **¿Qué pasaría si no existiera?** Cada tablero recalcularía todo al abrirse: lento y caro.
 # MAGIC >
-# MAGIC > Explicación completa: [`docs/12_por_que_asi.md`](../docs/12_por_que_asi.md#rendimiento) · glosario: [`docs/13_glosario.md`](../docs/13_glosario.md)
+# MAGIC > Explicación completa: [`docs/11_por_que_asi.md`](../docs/11_por_que_asi.md#rendimiento) · glosario: [`docs/12_glosario.md`](../docs/12_glosario.md)
 # MAGIC Ejecuta en orden los scripts de `sql/gold/marts/` (ventas diarias, RFM, cohortes, afinidad de productos,
 # MAGIC embudo web y la vista desnormalizada `v_sales_enriched`).
 

@@ -6,7 +6,7 @@
 # MAGIC >
 # MAGIC > **¿Qué pasaría si no existiera?** No habría datos: en la vida real este paso no existe porque los sistemas mandan sus archivos solos.
 # MAGIC >
-# MAGIC > Explicación completa: [`docs/12_por_que_asi.md`](../docs/12_por_que_asi.md#entrada) · glosario: [`docs/13_glosario.md`](../docs/13_glosario.md)
+# MAGIC > Explicación completa: [`docs/11_por_que_asi.md`](../docs/11_por_que_asi.md#entrada) · glosario: [`docs/12_glosario.md`](../docs/12_glosario.md)
 # MAGIC
 # MAGIC El generador corre **distribuido en Spark** (no en el driver): cada fila se calcula con
 # MAGIC `xxhash64(id, sal)`, así que es determinístico y escala linealmente con el cluster.

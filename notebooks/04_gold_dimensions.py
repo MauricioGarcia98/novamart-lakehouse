@@ -6,7 +6,7 @@
 # MAGIC >
 # MAGIC > **¿Qué pasaría si no existiera?** Las ventas sin cliente desaparecerían de los totales y reconstruir una dimensión cambiaría las claves de todas las ventas.
 # MAGIC >
-# MAGIC > Explicación completa: [`docs/12_por_que_asi.md`](../docs/12_por_que_asi.md#modelado) · glosario: [`docs/13_glosario.md`](../docs/13_glosario.md)
+# MAGIC > Explicación completa: [`docs/11_por_que_asi.md`](../docs/11_por_que_asi.md#modelado) · glosario: [`docs/12_glosario.md`](../docs/12_glosario.md)
 # MAGIC
 # MAGIC * `dim_customer`, `dim_product`: **SCD2** con clave subrogada determinística `xxhash64(natural_key, valid_from)`.
 # MAGIC * `dim_store`: SCD1 + miembro `-1` = "Canal digital (sin tienda)".

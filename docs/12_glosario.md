@@ -1,4 +1,4 @@
-# 13 · Glosario (en criollo)
+# 12 · Glosario (en criollo)
 
 > Cada término tiene una definición simple y, cuando aplica, **dónde aparece en NovaMart**.
 > Ordenado por tema, no alfabéticamente: leelo de arriba hacia abajo y los conceptos se apoyan entre sí.

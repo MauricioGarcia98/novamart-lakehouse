@@ -1,4 +1,4 @@
-# 12 · Por qué así y no de otra manera
+# 11 · Por qué así y no de otra manera
 
 > En data engineering **casi nunca hay una única forma correcta**: hay decisiones con ventajas y
 > costos. Este documento explica cada decisión importante del proyecto con el mismo formato:
@@ -10,7 +10,7 @@
 > * **Cuándo elegirías la otra opción** (porque ninguna decisión es universal)
 >
 > La versión técnica y resumida de estas decisiones está en [Arquitectura](01_arquitectura.md#decisiones-de-diseño-adr-resumidos).
-> Si una palabra no la conocés, está en el [Glosario](13_glosario.md).
+> Si una palabra no la conocés, está en el [Glosario](12_glosario.md).
 
 **Índice:** [Plataforma](#plataforma) · [Datos de entrada](#entrada) · [Capas](#capas) ·
 [Calidad](#calidad) · [Modelado](#modelado) · [Rendimiento](#rendimiento) · [Código](#codigo) ·

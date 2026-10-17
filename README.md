@@ -35,7 +35,7 @@ y el panel muestra las filas que se escriben en cada capa con <code>scale_factor
 
 > 🧭 **¿Nuevo en datos? Empezá por [`docs/00_empeza_aca.md`](docs/00_empeza_aca.md).** Explica en criollo qué es
 > este proyecto, por qué está armado así y por dónde seguir según tu perfil. Si te trabás con una palabra:
-> [glosario](docs/13_glosario.md) · con una duda: [preguntas frecuentes](docs/11_preguntas_frecuentes.md).
+> [glosario](docs/12_glosario.md) · con una duda: [preguntas frecuentes](docs/10_preguntas_frecuentes.md).
 
 ## 🧭 El proceso completo
 
@@ -249,12 +249,11 @@ novamart-lakehouse/
 | [Bitácora](docs/07_bitacora_primera_ejecucion.md) | primera ejecución real: errores explicados y resultados |
 | [Hacerlo más real](docs/08_hacerlo_mas_real.md) | mejoras técnicas rol por rol y hoja de ruta |
 | [Genie a fondo](docs/09_genie_a_fondo.md) | Genie One, Genie Agents, Agent mode, Genie Code y API |
-| [Prompts Andes](docs/10_prompts_proyectos_andes.md) | plantillas para proyectos de otros negocios |
-| [Preguntas frecuentes](docs/11_preguntas_frecuentes.md) | ¿de dónde vienen los datos?, límites, costos, capas, seguridad… |
-| [Por qué así](docs/12_por_que_asi.md) | cada decisión: alternativa, por qué, qué pasaría si no, cuándo elegir otra |
-| [Glosario](docs/13_glosario.md) | todos los términos en criollo, con dónde aparecen en el proyecto |
-| [Autoevaluación](docs/14_autoevaluacion.md) | 25 preguntas para comprobar que entendiste (con respuestas) |
-| [Cómo contarlo](docs/15_como_contarlo.md) | qué demuestra, pitch de 2 minutos y preguntas de entrevista |
+| [Preguntas frecuentes](docs/10_preguntas_frecuentes.md) | ¿de dónde vienen los datos?, límites, costos, capas, seguridad… |
+| [Por qué así](docs/11_por_que_asi.md) | cada decisión: alternativa, por qué, qué pasaría si no, cuándo elegir otra |
+| [Glosario](docs/12_glosario.md) | todos los términos en criollo, con dónde aparecen en el proyecto |
+| [Autoevaluación](docs/13_autoevaluacion.md) | 25 preguntas para comprobar que entendiste (con respuestas) |
+| [Cómo contarlo](docs/14_como_contarlo.md) | qué demuestra, pitch de 2 minutos y preguntas de entrevista |
 | [Diagramas](docs/diagrams/README.md) | 10 diagramas Excalidraw editables + animaciones Excalimate |
 
 <details>

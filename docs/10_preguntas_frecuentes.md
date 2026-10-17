@@ -1,8 +1,8 @@
-# 11 · Preguntas frecuentes (las que se hace todo el que empieza)
+# 10 · Preguntas frecuentes (las que se hace todo el que empieza)
 
 > Cada respuesta tiene tres partes: **la respuesta corta**, **el porqué** y **dónde verlo** en el
 > repo o en Databricks. Si una respuesta usa una palabra que no conocés, buscala en el
-> [Glosario](13_glosario.md).
+> [Glosario](12_glosario.md).
 >
 > Los números de este documento son **reales**: salen de la primera ejecución del 17/10/2026 con
 > `scale_factor = 0.1` en Free Edition.
@@ -348,7 +348,7 @@ formato columnar comprimido (Parquet). Por eso se convierte todo a Delta lo ante
 **Qué se puede hacer con ese espacio y con esa cuota:**
 * Este proyecto completo con `scale_factor` 0.1 (y probablemente hasta 0.3).
 * Los 18 módulos de `learning/`, dashboards, Genie Agents y el pipeline declarativo.
-* Varios proyectos chicos más (por ejemplo, los Andes), cada uno en su catálogo.
+* Varios proyectos chicos más, cada uno en su propio catálogo.
 
 **Cómo liberar espacio:**
 ```sql
@@ -445,10 +445,10 @@ dimensional, orquestación, despliegue con CI/CD, gobierno de datos y, sobre tod
 resolverlos** (la bitácora es exactamente eso).
 
 ### ¿Cómo lo muestro en una entrevista?
-Ver [Cómo contar este proyecto](15_como_contarlo.md): qué demuestra, cómo contarlo en 2 minutos y
+Ver [Cómo contar este proyecto](14_como_contarlo.md): qué demuestra, cómo contarlo en 2 minutos y
 las preguntas que te van a hacer.
 
 ### ¿Qué hago después de NovaMart?
-1. Hacé la [autoevaluación](14_autoevaluacion.md). Si respondés el 80 %, entendiste el proyecto.
+1. Hacé la [autoevaluación](13_autoevaluacion.md). Si respondés el 80 %, entendiste el proyecto.
 2. Elegí una mejora de [Hacerlo más real](08_hacerlo_mas_real.md) y hacela vos.
-3. Pasá a un proyecto Andes ([prompts](10_prompts_proyectos_andes.md)), centrado en Genie.
+3. Armá tu propio proyecto con otro negocio, aplicando lo aprendido (y con Genie en el centro).

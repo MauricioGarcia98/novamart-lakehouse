@@ -3,7 +3,7 @@
 ![Ruta](../docs/diagrams/09_ruta_aprendizaje.png)
 
 > **Antes de empezar:** si sos nuevo, leé [`docs/00_empeza_aca.md`](../docs/00_empeza_aca.md) y tené a mano el
-> [glosario](../docs/13_glosario.md). Los módulos usan el catálogo `novamart_dev` (el que crea la
+> [glosario](../docs/12_glosario.md). Los módulos usan el catálogo `novamart_dev` (el que crea la
 > [guía](../docs/06_guia_desde_la_web.md)); si desplegaste prod, cambialo por `novamart`.
 > Las 68 consultas de los módulos SQL fueron verificadas contra los datos reales (2026-10-17).
 
