@@ -1,0 +1,10 @@
+# Esquema del pipeline declarativo. Se declara en el bundle para que exista antes
+# de crear el pipeline. El CATÁLOGO no se declara acá: en workspaces con Default
+# Storage (Free Edition) la API REST no puede crearlo; hay que crearlo una vez por
+# SQL antes del primer deploy:  CREATE CATALOG IF NOT EXISTS novamart_dev
+resources:
+  schemas:
+    ldp:
+      catalog_name: ${var.catalog}
+      name: ldp
+      comment: Tablas del pipeline declarativo (Lakeflow Declarative Pipelines)

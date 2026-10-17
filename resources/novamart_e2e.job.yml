@@ -45,7 +45,7 @@ resources:
             notebook_path: ../notebooks/01_generate_data.py
 
         - task_key: bronze_ingest
-          depends_on: [{ task_key: generate_data }, { task_key: should_generate }]
+          depends_on: [{ task_key: generate_data }, { task_key: should_generate, outcome: "false" }]
           run_if: NONE_FAILED
           # Auto Loader detiene el stream una vez cuando detecta columnas nuevas: el reintento lo retoma
           max_retries: 2

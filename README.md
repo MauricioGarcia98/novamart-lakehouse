@@ -156,6 +156,10 @@ El mismo pipeline está implementado **dos veces**: imperativo (`src/` + noteboo
 ```bash
 # Databricks CLI: brew install databricks  |  winget install Databricks.DatabricksCLI
 databricks auth login --host https://<tu-workspace>.cloud.databricks.com
+# Una sola vez: el pipeline declarativo necesita que el catálogo exista al desplegar.
+# (En Default Storage / Free Edition sólo se puede crear por SQL, no vía API.)
+databricks api post /api/2.0/sql/statements --json \
+  '{"warehouse_id":"<id>","statement":"CREATE CATALOG IF NOT EXISTS novamart_dev"}'
 databricks bundle deploy -t dev
 databricks bundle run novamart_e2e -t dev        # pipeline completo (SF=0.1 por defecto)
 databricks bundle run novamart_daily -t dev      # simula la llegada de un día nuevo
