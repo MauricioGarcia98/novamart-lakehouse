@@ -56,6 +56,11 @@ def csv_schema(name: str) -> T.StructType:
     return T.StructType(fields)
 
 
+def csv_schema_hints(name: str) -> str:
+    """El mismo contrato que `csv_schema`, en formato DDL para `cloudFiles.schemaHints`."""
+    return ", ".join([f"`{c}` STRING" for c in CSV_CONTRACTS[name]] + ["ingest_date DATE"])
+
+
 def read_landing_stream(spark: SparkSession, cfg: ProjectConfig, name: str) -> DataFrame:
     fmt = SOURCE_FORMATS[name]
     path = cfg.landing_path(name)
@@ -70,12 +75,20 @@ def read_landing_stream(spark: SparkSession, cfg: ProjectConfig, name: str) -> D
             .option("cloudFiles.maxFilesPerTrigger", 2000)
             .option("rescuedDataColumn", "_rescued_data")
         )
+        if fmt == "csv":
+            # Auto Loader no admite .schema() con addNewColumns: el contrato va como schemaHints
+            reader = (
+                reader.option("cloudFiles.inferColumnTypes", "false")
+                .option("cloudFiles.schemaHints", csv_schema_hints(name))
+            )
     else:
         reader = spark.readStream.format(fmt).option("maxFilesPerTrigger", 2000)
         if fmt == "json":
             reader = reader.option("columnNameOfCorruptRecord", "_rescued_data")
+        if fmt == "csv":
+            reader = reader.schema(csv_schema(name))
     if fmt == "csv":
-        reader = reader.schema(csv_schema(name)).option("header", "true").option("mode", "PERMISSIVE")
+        reader = reader.option("header", "true").option("mode", "PERMISSIVE")
     return reader.load(path)
 
 
