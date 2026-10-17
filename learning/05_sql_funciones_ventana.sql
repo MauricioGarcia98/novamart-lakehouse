@@ -15,7 +15,7 @@
 
 -- COMMAND ----------
 
-USE CATALOG novamart;
+USE CATALOG novamart_dev;  -- catálogo del target dev (en prod: novamart)
 
 -- COMMAND ----------
 

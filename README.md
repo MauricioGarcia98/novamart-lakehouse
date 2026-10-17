@@ -33,6 +33,10 @@ y el panel muestra las filas que se escriben en cada capa con <code>scale_factor
 
 ---
 
+> 🧭 **¿Nuevo en datos? Empezá por [`docs/00_empeza_aca.md`](docs/00_empeza_aca.md).** Explica en criollo qué es
+> este proyecto, por qué está armado así y por dónde seguir según tu perfil. Si te trabás con una palabra:
+> [glosario](docs/13_glosario.md) · con una duda: [preguntas frecuentes](docs/11_preguntas_frecuentes.md).
+
 ## 🧭 El proceso completo
 
 <p align="center">
@@ -165,8 +169,7 @@ databricks bundle run novamart_e2e -t dev        # pipeline completo (SF=0.1 por
 databricks bundle run novamart_daily -t dev      # simula la llegada de un día nuevo
 ```
 
-Sin CLI: *Workspace → Create → Git folder* con la URL de este repo y ejecutá `notebooks/00_setup` → `07_data_quality_report`.
-En Free Edition, si no podés crear catálogos, usá el widget `catalog = workspace`.
+Sin CLI, todo desde el navegador: [guía paso a paso con capturas](docs/06_guia_desde_la_web.md).
 
 </details>
 
@@ -236,6 +239,7 @@ novamart-lakehouse/
 
 | Documento | Contenido |
 |---|---|
+| [**Empezá acá**](docs/00_empeza_aca.md) | qué es, la historia, el modelo mental y por dónde seguir según tu perfil |
 | [Arquitectura](docs/01_arquitectura.md) | capas, decisiones de diseño (ADR), flujo incremental |
 | [Fuentes y datos](docs/02_fuentes_y_datos.md) | volúmenes, problemas inyectados, diccionario de datos |
 | [Modelado](docs/03_modelado_de_datos.md) | Kimball, SCD, claves subrogadas, estrella vs OBT vs Data Vault |
@@ -246,6 +250,11 @@ novamart-lakehouse/
 | [Hacerlo más real](docs/08_hacerlo_mas_real.md) | mejoras técnicas rol por rol y hoja de ruta |
 | [Genie a fondo](docs/09_genie_a_fondo.md) | Genie One, Genie Agents, Agent mode, Genie Code y API |
 | [Prompts Andes](docs/10_prompts_proyectos_andes.md) | plantillas para proyectos de otros negocios |
+| [Preguntas frecuentes](docs/11_preguntas_frecuentes.md) | ¿de dónde vienen los datos?, límites, costos, capas, seguridad… |
+| [Por qué así](docs/12_por_que_asi.md) | cada decisión: alternativa, por qué, qué pasaría si no, cuándo elegir otra |
+| [Glosario](docs/13_glosario.md) | todos los términos en criollo, con dónde aparecen en el proyecto |
+| [Autoevaluación](docs/14_autoevaluacion.md) | 25 preguntas para comprobar que entendiste (con respuestas) |
+| [Cómo contarlo](docs/15_como_contarlo.md) | qué demuestra, pitch de 2 minutos y preguntas de entrevista |
 | [Diagramas](docs/diagrams/README.md) | 10 diagramas Excalidraw editables + animaciones Excalimate |
 
 <details>

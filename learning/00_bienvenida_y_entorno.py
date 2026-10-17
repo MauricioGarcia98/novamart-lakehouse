@@ -15,7 +15,7 @@
 # MAGIC ## 2. Jerarquía de Unity Catalog (3 niveles)
 # MAGIC ```
 # MAGIC metastore
-# MAGIC  └── catálogo   (novamart)
+# MAGIC  └── catálogo   (novamart_dev en dev · novamart en prod)
 # MAGIC       └── esquema    (bronze / silver / gold / ops / landing)
 # MAGIC            ├── tabla      (gold.fact_sales)
 # MAGIC            ├── vista      (gold.v_sales_enriched)
@@ -42,7 +42,7 @@
 
 # COMMAND ----------
 
-dbutils.widgets.text("catalog", "novamart", "Catálogo")
+dbutils.widgets.text("catalog", "novamart_dev", "Catálogo")  # en prod: novamart
 catalog = dbutils.widgets.get("catalog")
 spark.sql(f"USE CATALOG {catalog}")
 display(spark.sql("SHOW SCHEMAS"))
@@ -73,7 +73,7 @@ display(dbutils.fs.ls(f"/Volumes/{catalog}/landing/raw/landing/"))
 # COMMAND ----------
 
 # MAGIC %sql
-# MAGIC SELECT * FROM read_files('/Volumes/novamart/landing/raw/landing/stores', format => 'csv', header => true) LIMIT 5;
+# MAGIC SELECT * FROM read_files('/Volumes/novamart_dev/landing/raw/landing/stores', format => 'csv', header => true) LIMIT 5;
 
 # COMMAND ----------
 

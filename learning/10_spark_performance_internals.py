@@ -15,7 +15,7 @@
 
 # COMMAND ----------
 
-dbutils.widgets.text("catalog", "novamart")
+dbutils.widgets.text("catalog", "novamart_dev")  # en prod: novamart
 spark.sql(f"USE CATALOG {dbutils.widgets.get('catalog')}")
 
 import time

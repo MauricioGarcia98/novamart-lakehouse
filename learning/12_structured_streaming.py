@@ -13,7 +13,7 @@
 
 # COMMAND ----------
 
-dbutils.widgets.text("catalog", "novamart")
+dbutils.widgets.text("catalog", "novamart_dev")  # en prod: novamart
 catalog = dbutils.widgets.get("catalog")
 spark.sql(f"USE CATALOG {catalog}")
 from pyspark.sql import functions as F

@@ -2,12 +2,18 @@
 # MAGIC %md
 # MAGIC # 02 · Bronze: ingesta incremental con Auto Loader
 # MAGIC
+# MAGIC > **¿Para qué existe este paso?** Tener una copia fiel, incremental y con linaje de todo lo que llegó, para poder reprocesar sin pedirle nada a nadie.
+# MAGIC >
+# MAGIC > **¿Qué pasaría si no existiera?** Un error en la limpieza obligaría a releer todos los archivos (si todavía existen); y cada día se releerían años de datos.
+# MAGIC >
+# MAGIC > Explicación completa: [`docs/12_por_que_asi.md`](../docs/12_por_que_asi.md#capas) · glosario: [`docs/13_glosario.md`](../docs/13_glosario.md)
+# MAGIC
 # MAGIC ```
 # MAGIC landing/<fuente>/ingest_date=.../*.json  ──Auto Loader──▶  bronze.<fuente>  (Delta)
 # MAGIC ```
 # MAGIC * `cloudFiles` descubre **sólo archivos nuevos** (estado en el checkpoint).
 # MAGIC * `schemaEvolutionMode=addNewColumns`: si aparece una columna nueva (ej. `experiment_id` en web_events),
-# MAGIC   el stream se detiene una vez, actualiza el esquema y al reintentar sigue. Por eso el Job tiene reintentos.
+# MAGIC   el stream se detiene una vez y actualiza el esquema; `bronze.py` lo reinicia solo (ver `docs/07_bitacora_primera_ejecucion.md`, sección 7).
 # MAGIC * Lo que no encaja en el esquema va a `_rescued_data`: **nunca se pierde un dato**.
 # MAGIC * `trigger(availableNow=True)`: procesa todo lo pendiente y termina (costo de batch, garantías de streaming).
 

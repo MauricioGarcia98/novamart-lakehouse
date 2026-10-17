@@ -2,6 +2,12 @@
 # MAGIC %md
 # MAGIC # 04 · Gold: dimensiones
 # MAGIC
+# MAGIC > **¿Para qué existe este paso?** Armar el contexto de los hechos (quién, qué, dónde, cuándo) con claves estables y la fila `-1` para lo desconocido.
+# MAGIC >
+# MAGIC > **¿Qué pasaría si no existiera?** Las ventas sin cliente desaparecerían de los totales y reconstruir una dimensión cambiaría las claves de todas las ventas.
+# MAGIC >
+# MAGIC > Explicación completa: [`docs/12_por_que_asi.md`](../docs/12_por_que_asi.md#modelado) · glosario: [`docs/13_glosario.md`](../docs/13_glosario.md)
+# MAGIC
 # MAGIC * `dim_customer`, `dim_product`: **SCD2** con clave subrogada determinística `xxhash64(natural_key, valid_from)`.
 # MAGIC * `dim_store`: SCD1 + miembro `-1` = "Canal digital (sin tienda)".
 # MAGIC * `dim_date`: calendario con eventos comerciales y año fiscal (role-playing).

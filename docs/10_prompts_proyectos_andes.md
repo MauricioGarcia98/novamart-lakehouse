@@ -16,6 +16,39 @@
 
 ---
 
+## 0 · Requisitos acordados para los proyectos Andes (versión 2, 17/10/2026)
+
+> **No confundir con NovaMart.** NovaMart es el proyecto para **entender todo** (cada capa, cada
+> decisión, cada error). Los proyectos Andes tienen **otro objetivo**: parecerse lo más posible a
+> **un negocio real** y poner a **Genie en el centro**, para que las áreas de la empresa lo usen y
+> para aprender a usarlo de verdad.
+
+| Requisito | Qué significa en la práctica |
+|---|---|
+| **Lo más real posible** | Empresa con **historia** (fundación, crecimiento, crisis, decisiones pasadas), personas con nombre y cargo, datos con los problemas que tendría ese negocio en Latinoamérica (inflación, regulación, estacionalidad, clima) |
+| **Genie en el centro** | El producto final es que **las áreas consulten con Genie** (Genie One, Genie Agents, Agent mode). Genie Code se usa para construir. La capa de datos existe para que Genie responda bien |
+| **Usuarios = áreas de la empresa** | Cada proyecto define las áreas que tenga ese negocio (por ejemplo marketing, análisis de datos, finanzas, operaciones, ventas, RR. HH., dirección…). Son ejemplos: se eligen según el negocio y se pueden agregar otras |
+| **Varios casos y problemas de negocio** | No uno solo: cada área tiene sus preguntas, sus dolores y sus decisiones. Con un "dueño" del problema, un KPI de éxito y la pregunta que le haría a Genie |
+| **E2E completo** | Fuentes → bronze → silver → gold → metric views → Genie Agents → dashboards → API/App, con CI/CD y ambientes dev/prod |
+| **Didáctico como NovaMart** | Empezá acá, preguntas frecuentes, por qué así, glosario, autoevaluación, bitácora real, guía web con capturas |
+| **Visual** | Diagramas Excalidraw, SVG animado del job en el README, gráficos con datos reales |
+| **Un repo por negocio** | Nombre "Andes [negocio]", con nombres creativos |
+| **Si hay dudas, preguntar** | Antes de construir, confirmar con el dueño del proyecto lo que no esté claro |
+
+Agregá esto al **Bloque base** al pegarlo:
+
+```text
+OBJETIVO PRINCIPAL: que el negocio funcione "como uno real" y que GENIE sea el centro. Escribí
+primero la HISTORIA de la empresa (origen, hitos, crisis, situación actual, personas clave con
+nombre y cargo) y un MAPA DE ÁREAS (qué hace cada una, quién la lidera, qué decisiones toma, qué
+preguntas le hace hoy a Excel o a otra persona). Para cada área: 3-5 problemas de negocio reales,
+con KPI, dueño, frecuencia y la pregunta exacta que le haría a Genie. Diseñá gold, metric views y
+Genie Agents EN FUNCIÓN de esas preguntas (no al revés). Incluí guiones de uso de Genie por área
+("un día de trabajo de la analista de marketing con Genie"), benchmarks por agente y una guía
+para que yo aprenda Genie paso a paso con este negocio. Si algo del negocio no está claro,
+preguntame antes de construirlo.
+```
+
 ## 1 · Bloque base (pegarlo SIEMPRE primero)
 
 ```text
